@@ -1,9 +1,9 @@
-import MusicBox from "@/components/MusicBox";
+import DynamicMusicBox from "@/components/DynamicMusicBox";
 
 export default function Home() {
   return (
     <>
-      <MusicBox />
+      <DynamicMusicBox />
     </>
   )
 }
