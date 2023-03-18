@@ -10,6 +10,8 @@
 // GPT4: I apologize for the oversight. The issue is caused by triggering the notes inside the loop of the callback function. The correct approach is to collect all the notes to be played in the current position and play them simultaneously outside the loop. Here's the updated `MusicBox` component with the correct note triggering:
 // Prommpt: I've encountered a new problem: Notes stored in notesToPlay are never removed if I deactivate a Tile.
 // GPT4: I apologize for the confusion. The issue occurs because we're not updating the `activeNotes` state when a tile is deactivated. To fix this, we need to update the `handleTileClick` function to remove the deactivated notes from the `activeNotes` state. Here's the updated `MusicBox` component with the correct note removal:
+// Prompt: Hmm, this still doesn't work. somehow activeNotes is never updated.
+// GPT4: I apologize for the confusion. The issue is caused by the closure in the `createMusicalTiming` callback function, which captures the initial value of `activeNotes`. To fix this, we can use a ref to store the `activeNotes` and ensure that the callback always has access to the latest state. Here's the updated `MusicBox` component with the correct handling of `activeNotes`:
 
 // File: src/components/MusicBox.tsx
 import React, { useState, useRef } from 'react';
@@ -27,6 +29,7 @@ interface ActiveNotes {
 
 const MusicBox: React.FC = () => {
   const [activeNotes, setActiveNotes] = useState<ActiveNotes>({});
+  const activeNotesRef = useRef<ActiveNotes>(activeNotes);
   const [isPlaying, setIsPlaying] = useState(false);
   const timingRef = useRef<any>(null);
   const positionRef = useRef<number>(0);
@@ -39,7 +42,6 @@ const MusicBox: React.FC = () => {
     } else {
       const updatedActiveNotes = { ...activeNotes };
       delete updatedActiveNotes[`${x}-${y}`];
-      console.log(updatedActiveNotes);
       setActiveNotes(updatedActiveNotes);
     }
   };
@@ -48,9 +50,8 @@ const MusicBox: React.FC = () => {
     if (!timingRef.current) {
       timingRef.current = createMusicalTiming(() => {
         const notesToPlay: number[] = [];
-        console.log(activeNotes);
         for (let y = 0; y < 8; y++) {
-          if (activeNotes[`${positionRef.current}-${y}`]) {
+          if (activeNotesRef.current[`${positionRef.current}-${y}`]) {
             notesToPlay.push(baseNote + majorScale[y]);
           }
         }
@@ -66,6 +67,10 @@ const MusicBox: React.FC = () => {
     }
     setIsPlaying(!isPlaying);
   };
+
+  React.useEffect(() => {
+    activeNotesRef.current = activeNotes;
+  }, [activeNotes]);
 
   return (
     <div className="w-full h-full flex flex-col items-center justify-center">
