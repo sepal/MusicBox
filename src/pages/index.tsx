@@ -1,9 +1,12 @@
+import Grid from "@/components/Grid"
 import Hello from "@/components/Hello"
 
 export default function Home() {
   return (
     <>
-      <Hello />
+      <Grid onTileClick={(x, y, isActive) => {
+        console.log(`${x}:${y} ${isActive ? "on" : "off"}`)
+      }} />
     </>
   )
 }
