@@ -4,7 +4,8 @@ MusicBox
 Created by GPT4
 ------
 
-This is a small test application I co-created with GPT4. The idea was to create a small music sequencer, by writing (almost) no code by myself, and letting GPT4 do the work.
+This is a small test application I co-created with GPT4. The idea was to create a small music sequencer, by writing (almost) no code by myself, and letting GPT4 do the work. The result can be tested under the following url:
+https://gpt4-music-e2ybtpx6d-sepal.vercel.app/
 
 Before starting I:
 * Created a new nextjs project with typescript
