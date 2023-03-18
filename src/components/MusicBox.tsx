@@ -8,6 +8,8 @@
 // GPT4: I apologize for the issue. The problem is caused by using the default note value of '8n' for `createMusicalTiming`. Since the grid is 8x8, we need to use a sixteenth note ('16n') as the note value to ensure every tile is played. Here's the updated `MusicBox` component with the correct note value:
 // Prompt: Ok now the second problem: I can't play polyphonic melodies. So if I set 0:0 and 0:2 only the note for the Tile at 0:0 is played.
 // GPT4: I apologize for the oversight. The issue is caused by triggering the notes inside the loop of the callback function. The correct approach is to collect all the notes to be played in the current position and play them simultaneously outside the loop. Here's the updated `MusicBox` component with the correct note triggering:
+// Prommpt: I've encountered a new problem: Notes stored in notesToPlay are never removed if I deactivate a Tile.
+// GPT4: I apologize for the confusion. The issue occurs because we're not updating the `activeNotes` state when a tile is deactivated. To fix this, we need to update the `handleTileClick` function to remove the deactivated notes from the `activeNotes` state. Here's the updated `MusicBox` component with the correct note removal:
 
 // File: src/components/MusicBox.tsx
 import React, { useState, useRef } from 'react';
@@ -31,10 +33,14 @@ const MusicBox: React.FC = () => {
 
   const handleTileClick = (x: number, y: number, isActive: boolean) => {
     const note = baseNote + majorScale[y];
-    setActiveNotes({ ...activeNotes, [`${x}-${y}`]: isActive });
-
     if (isActive) {
+      setActiveNotes({ ...activeNotes, [`${x}-${y}`]: true });
       playNote(note);
+    } else {
+      const updatedActiveNotes = { ...activeNotes };
+      delete updatedActiveNotes[`${x}-${y}`];
+      console.log(updatedActiveNotes);
+      setActiveNotes(updatedActiveNotes);
     }
   };
 
@@ -42,6 +48,7 @@ const MusicBox: React.FC = () => {
     if (!timingRef.current) {
       timingRef.current = createMusicalTiming(() => {
         const notesToPlay: number[] = [];
+        console.log(activeNotes);
         for (let y = 0; y < 8; y++) {
           if (activeNotes[`${positionRef.current}-${y}`]) {
             notesToPlay.push(baseNote + majorScale[y]);
