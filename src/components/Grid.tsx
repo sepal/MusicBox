@@ -1,4 +1,5 @@
 // Prompt: Create the 8x8 grid component based on Tile component. Add a prop function, that is called as soon as a tile is clicked. It should return which tile was clicked as x and y coordinates and if the tile was activated or deactivated.
+// Prompt: I get an error when I click a tile: ReferenceError: isActive is not defined
 
 // File: src/components/Grid.tsx
 import React from 'react';
@@ -16,7 +17,7 @@ const Grid: React.FC<GridProps> = ({ onTileClick }) => {
         tiles.push(
           <Tile
             key={`${x}-${y}`}
-            onClick={() => onTileClick(x, y, !isActive)}
+            onClick={(isActive) => onTileClick(x, y, isActive)}
           />
         );
       }
