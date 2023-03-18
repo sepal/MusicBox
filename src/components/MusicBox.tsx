@@ -6,6 +6,8 @@
 //         Every second Tile is not played. So if I set for the tiles 0:0 1:1, 2:2 and 3:3 only 0:0 and 2:2 are played, but not 1:1 and 3:3
 //         In my example I use x:y for the tile coordinates
 // GPT4: I apologize for the issue. The problem is caused by using the default note value of '8n' for `createMusicalTiming`. Since the grid is 8x8, we need to use a sixteenth note ('16n') as the note value to ensure every tile is played. Here's the updated `MusicBox` component with the correct note value:
+// Prompt: Ok now the second problem: I can't play polyphonic melodies. So if I set 0:0 and 0:2 only the note for the Tile at 0:0 is played.
+// GPT4: I apologize for the oversight. The issue is caused by triggering the notes inside the loop of the callback function. The correct approach is to collect all the notes to be played in the current position and play them simultaneously outside the loop. Here's the updated `MusicBox` component with the correct note triggering:
 
 // File: src/components/MusicBox.tsx
 import React, { useState, useRef } from 'react';
@@ -39,11 +41,13 @@ const MusicBox: React.FC = () => {
   const handlePlayPause = () => {
     if (!timingRef.current) {
       timingRef.current = createMusicalTiming(() => {
+        const notesToPlay: number[] = [];
         for (let y = 0; y < 8; y++) {
           if (activeNotes[`${positionRef.current}-${y}`]) {
-            playNote(baseNote + majorScale[y]);
+            notesToPlay.push(baseNote + majorScale[y]);
           }
         }
+        notesToPlay.forEach((note) => playNote(note));
         positionRef.current = (positionRef.current + 1) % 8;
       }, { noteValue: '16n' });
     }
