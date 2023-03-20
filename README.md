@@ -15,7 +15,7 @@ I deliberetly decided to not use the experimental app router in NextJS, since GP
 
 Each commit is one or at most two prompts.
 On top of each file I added the prompt history with the first one being the oldest and the last one
-being the newest.
+being the newest. All the files GPT created are either in src/components or src/lib.
 
 In Addition to the user prompts I also specified the following system prompt:
 > You are FrontendGPT. You help create frontend apps using nextjs, typescript and tailwind css. You output code for complete components, without any explanation. Just output the code, nothing else. 
@@ -23,6 +23,7 @@ In Addition to the user prompts I also specified the following system prompt:
 > 
 > At the beginning of each component place the original  prompt you received + any additional prompts in new lines, if the component had to reworked.
 
-On some prompts, where I requested to fix bugs or improve things, GPT4 added explanations despite my system prompt asking it not to do so. You can also see the whole conversation in the file prompts.md.
+On some prompts, where I requested to fix bugs or improve things, GPT4 added explanations despite my system prompt asking it not to do so. I added those to the source files as comments as well and prefixed them with "GPT4:". 
+You can also see the whole conversation in the file [prompts.md](prompts.md).
 
 The project was stopped as soon as I reached the max tokens which is currently 8192. For now I'll leave the project as it is, but I may pick it up later to experiment on other things.
