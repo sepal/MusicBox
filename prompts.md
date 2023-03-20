@@ -3,7 +3,9 @@
 Let's start with the tile component for the grid. Users should be square with rounded cornerns, that users can click to activate or deactivate it. Use a light yellow for the active for when the tile is active and a light gray if it's inactive
 
 ---
-[assistant]: // Prompt: Help me create an app call MusicBox, that will allow users to create short melodies using a 8x8 grid. Let's start with the tile component for the grid. Users should be square with rounded cornerns, that users can click to activate or deactivate it. Use a light yellow for the active for when the tile is active and a light gray if it's inactive
+[assistant]: 
+```
+// Prompt: Help me create an app call MusicBox, that will allow users to create short melodies using a 8x8 grid. Let's start with the tile component for the grid. Users should be square with rounded cornerns, that users can click to activate or deactivate it. Use a light yellow for the active for when the tile is active and a light gray if it's inactive
 
 // File: src/components/Tile.tsx
 import React, { useState } from 'react';
@@ -36,12 +38,14 @@ export default Tile;
 
 // Usage Example
 // import Tile from "@/components/Tile.tsx";
-
+```
 ---
 [user]: Create the 8x8 grid component based on Tile component. Add a prop function, that is called as soon as a tile is clicked. It should return which tile was clicked as x and y coordinates and if the tile was activated or deactivated.
 
 ---
-[assistant]: // Prompt: Create the 8x8 grid component based on Tile component. Add a prop function, that is called as soon as a tile is clicked. It should return which tile was clicked as x and y coordinates and if the tile was activated or deactivated.
+[assistant]:
+```
+// Prompt: Create the 8x8 grid component based on Tile component. Add a prop function, that is called as soon as a tile is clicked. It should return which tile was clicked as x and y coordinates and if the tile was activated or deactivated.
 
 // File: src/components/Grid.tsx
 import React from 'react';
@@ -78,12 +82,14 @@ export default Grid;
 
 // Usage Example
 // import Grid from "@/components/Grid.tsx";
-
+```
 ---
 [user]: I get an error when I click a tile: ReferenceError: isActive is not defined
 
 ---
-[assistant]: // Prompt: I get an error when I click a tile: ReferenceError: isActive is not defined
+[assistant]:
+```
+// Prompt: I get an error when I click a tile: ReferenceError: isActive is not defined
 
 // File: src/components/Tile.tsx
 import React, { useState } from 'react';
@@ -149,12 +155,14 @@ export default Grid;
 
 // Usage Example
 // import Grid from "@/components/Grid.tsx";
-
+```
 ---
 [user]: Let's create a utility file, that allows me to play a tone based on a given midi note number. The tone should sound similar to a kalimba. 
 
 ---
-[assistant]: // Prompt: Let's create a utility file, that allows me to play a tone based on a given midi note number. The tone should sound similar to a kalimba.
+[assistant]:
+```
+// Prompt: Let's create a utility file, that allows me to play a tone based on a given midi note number. The tone should sound similar to a kalimba.
 
 // File: src/lib/audioUtils.ts
 import * as Tone from 'tone';
@@ -179,13 +187,15 @@ export const playNote = (midiNote: number) => {
 // Usage Example
 // import { playNote } from "@/lib/audioUtils";
 // playNote(60); // Plays a C4 note
-
+```
 
 ---
 [user]: Create a component that plays note based on which tile was clicked. Use a major scale, with the lowest row playing a c3 and the highest a c4. It should also have a state that remembers, which note is active based on the tiles that are active on the grid.
 
 ---
-[assistant]: // Prompt: Create a component that plays note based on which tile was clicked. Use a major scale, with the lowest row playing a c3 and the highest a c4. It should also have a state that remembers, which note is active based on the tiles that are active on the grid.
+[assistant]:
+```
+// Prompt: Create a component that plays note based on which tile was clicked. Use a major scale, with the lowest row playing a c3 and the highest a c4. It should also have a state that remembers, which note is active based on the tiles that are active on the grid.
 
 // File: src/components/MusicBox.tsx
 import React, { useState } from 'react';
@@ -222,12 +232,14 @@ export default MusicBox;
 
 // Usage Example
 // import MusicBox from "@/components/MusicBox.tsx";
-
+```
 ---
 [user]: Ok, I think I explained it not precise enough. The y coordinate in the grid should define which note to play, ignore the x coordinate for now.
 
 ---
-[assistant]: // Prompt: Ok, I think I explained it not precise enough. The y coordinate in the grid should define which note to play, ignore the x coordinate for now.
+[assistant]:
+```
+// Prompt: Ok, I think I explained it not precise enough. The y coordinate in the grid should define which note to play, ignore the x coordinate for now.
 
 // File: src/components/MusicBox.tsx
 import React, { useState } from 'react';
@@ -264,13 +276,14 @@ export default MusicBox;
 
 // Usage Example
 // import MusicBox from "@/components/MusicBox.tsx";
-
+```
 ---
 [user]: When I reload the page I get the error "ReferenceError: AudioBuffer is not defined". Most probably because nextjs is trying to render the page on the server, which doesn't supports audiobuffer.
 
 ---
 [assistant]: You are correct. The issue is due to the server-side rendering of Next.js trying to access the `AudioBuffer`, which is not available on the server side. To fix this, we can use dynamic imports to load the `MusicBox` component only on the client side.
 
+```
 // File: src/components/DynamicMusicBox.tsx
 import dynamic from 'next/dynamic';
 
@@ -282,12 +295,15 @@ export default MusicBox;
 
 // Usage Example
 // import DynamicMusicBox from "@/components/DynamicMusicBox.tsx";
+```
 
 ---
 [user]: Please create a new play/pause button component. Initially it should say "Play" and use an appropriate emoji. If it's clicked, it should say pause and have the different appropriate emoji
 
 ---
-[assistant]: // Prompt: Please create a new play/pause button component. Initially it should say "Play" and use an appropriate emoji. If it's clicked, it should say pause and have the different appropriate emoji.
+[assistant]:
+```
+// Prompt: Please create a new play/pause button component. Initially it should say "Play" and use an appropriate emoji. If it's clicked, it should say pause and have the different appropriate emoji.
 
 // File: src/components/PlayPauseButton.tsx
 import React, { useState } from 'react';
@@ -327,12 +343,15 @@ export default PlayPauseButton;
 
 // Usage Example
 // import PlayPauseButton from "@/components/PlayPauseButton.tsx";
+```
 
 ---
 [user]: Let's add this button to the Music box component. It should be displayed above the grid.
 
 ---
-[assistant]: // Prompt: Let's add this button to the Music box component. It should be displayed above the grid.
+[assistant]:
+```
+// Prompt: Let's add this button to the Music box component. It should be displayed above the grid.
 
 // File: src/components/MusicBox.tsx
 import React, { useState } from 'react';
@@ -373,6 +392,7 @@ export default MusicBox;
 
 // Usage Example
 // import MusicBox from "@/components/MusicBox.tsx";
+```
 
 ---
 [user]: Now I need a utility function, that will allow me trigger another callback function based on musical timing. It should allow me 
@@ -383,7 +403,9 @@ export default MusicBox;
 
 
 ---
-[assistant]: // Prompt: Now I need a utility function, that will allow me trigger another callback function based on musical timing. It should allow me to set the beats per minutes, by default it should be 120, change note value, which changes when the callback functions is called. Default value should be an eight note. The beat type, e.g. if it's a 4/4 or 3/4, .. beat. The amount of swing between the notes.
+[assistant]:
+```
+// Prompt: Now I need a utility function, that will allow me trigger another callback function based on musical timing. It should allow me to set the beats per minutes, by default it should be 120, change note value, which changes when the callback functions is called. Default value should be an eight note. The beat type, e.g. if it's a 4/4 or 3/4, .. beat. The amount of swing between the notes.
 
 // File: src/lib/musicalTiming.ts
 import * as Tone from 'tone';
@@ -430,12 +452,15 @@ export const createMusicalTiming = (
 // const timing = createMusicalTiming(myCallbackFunction, { bpm: 120, noteValue: '8n', beatType: 4, swing: 0 });
 // timing.start();
 // timing.stop();
+```
 
 ---
 [user]: Now let's use the createMusicalTiming function in the MusicBox component. The Play/Pause button should start and stop the musical timing. The callback function should play a note depending on how the grid is set. The x coordinate should determine when note is played, the y should play which note.
 
 ---
-[assistant]: // Prompt: Now let's use the createMusicalTiming function in the MusicBox component. The Play/Pause button should start and stop the musical timing. The callback function should play a note depending on how the grid is set. The x coordinate should determine when note is played, the y should play which note.
+[assistant]:
+```
+// Prompt: Now let's use the createMusicalTiming function in the MusicBox component. The Play/Pause button should start and stop the musical timing. The callback function should play a note depending on how the grid is set. The x coordinate should determine when note is played, the y should play which note.
 
 // File: src/components/MusicBox.tsx
 import React, { useState, useRef } from 'react';
@@ -539,6 +564,7 @@ export default PlayPauseButton;
 
 // Usage Example
 // import MusicBox from "@/components/MusicBox.tsx";
+```
 
 ---
 [user]: I  encountered two problems, but let's start with the first one:
@@ -549,6 +575,7 @@ In my example I use x:y for the tile coordinates
 ---
 [assistant]: I apologize for the issue. The problem is caused by using the default note value of '8n' for `createMusicalTiming`. Since the grid is 8x8, we need to use a sixteenth note ('16n') as the note value to ensure every tile is played. Here's the updated `MusicBox` component with the correct note value:
 
+```
 // File: src/components/MusicBox.tsx
 import React, { useState, useRef } from 'react';
 import Grid from '@/components/Grid';
@@ -612,6 +639,7 @@ export default MusicBox;
 
 // Usage Example
 // import MusicBox from "@/components/MusicBox.tsx";
+```
 
 ---
 [user]: Ok now the second problem: I can't play polyphonic melodies. So if I set 0:0 and 0:2 only the note for the Tile at 0:0 is played.
@@ -619,6 +647,7 @@ export default MusicBox;
 ---
 [assistant]: I apologize for the oversight. The issue is caused by triggering the notes inside the loop of the callback function. The correct approach is to collect all the notes to be played in the current position and play them simultaneously outside the loop. Here's the updated `MusicBox` component with the correct note triggering:
 
+```
 // File: src/components/MusicBox.tsx
 import React, { useState, useRef } from 'react';
 import Grid from '@/components/Grid';
@@ -684,6 +713,7 @@ export default MusicBox;
 
 // Usage Example
 // import MusicBox from "@/components/MusicBox.tsx";
+```
 
 ---
 [user]: I've encountered a new problem: Notes stored in notesToPlay are never removed if I deactivate a Tile. 
@@ -691,6 +721,7 @@ export default MusicBox;
 ---
 [assistant]: I apologize for the confusion. The issue occurs because we're not updating the `activeNotes` state when a tile is deactivated. To fix this, we need to update the `handleTileClick` function to remove the deactivated notes from the `activeNotes` state. Here's the updated `MusicBox` component with the correct note removal:
 
+```
 // File: src/components/MusicBox.tsx
 import React, { useState, useRef } from 'react';
 import Grid from '@/components/Grid';
@@ -759,6 +790,7 @@ export default MusicBox;
 
 // Usage Example
 // import MusicBox from "@/components/MusicBox.tsx";
+```
 
 ---
 [user]: Hmm, this still doesn't work. somehow activeNotes is never updated.
@@ -766,6 +798,7 @@ export default MusicBox;
 ---
 [assistant]: I apologize for the confusion. The issue is caused by the closure in the `createMusicalTiming` callback function, which captures the initial value of `activeNotes`. To fix this, we can use a ref to store the `activeNotes` and ensure that the callback always has access to the latest state. Here's the updated `MusicBox` component with the correct handling of `activeNotes`:
 
+```
 // File: src/components/MusicBox.tsx
 import React, { useState, useRef } from 'react';
 import Grid from '@/components/Grid';
@@ -839,6 +872,7 @@ export default MusicBox;
 
 // Usage Example
 // import MusicBox from "@/components/MusicBox.tsx";
+```
 
 ---
 [user]: Nice that worked. Now let's fix an issue with the sound: It sounds very distorted, but I want a clean sound, even if multiple notes are played at once.
@@ -846,6 +880,7 @@ export default MusicBox;
 ---
 [assistant]: The distortion might be caused by overlapping notes with high gain. To fix this issue, we can adjust the `PolySynth` settings to have a lower gain and smoother sound. Let's update the `audioUtils.ts` file to make these changes:
 
+```
 // File: src/lib/audioUtils.ts
 import * as Tone from 'tone';
 
@@ -869,6 +904,7 @@ export const playNote = (midiNote: number) => {
 // Usage Example
 // import { playNote } from "@/lib/audioUtils";
 // playNote(60); // Plays a C4 note
+```
 
 Now the sound should be cleaner and less distorted when multiple notes are played simultaneously.
 
@@ -878,6 +914,7 @@ Now the sound should be cleaner and less distorted when multiple notes are playe
 ---
 [assistant]: I apologize for the confusion. To further reduce distortion and produce a cleaner sound, we can adjust the `gain` value in the `audioUtils.ts` file. Additionally, we can change the oscillator type to `'triangle'` for a smoother sound. Here's the updated `audioUtils.ts` file:
 
+```
 // File: src/lib/audioUtils.ts
 import * as Tone from 'tone';
 
@@ -903,6 +940,7 @@ export const playNote = (midiNote: number) => {
 // Usage Example
 // import { playNote } from "@/lib/audioUtils";
 // playNote(60); // Plays a C4 note
+```
 
 Now the sound should be cleaner and less distorted, even when multiple notes are played simultaneously.
 
